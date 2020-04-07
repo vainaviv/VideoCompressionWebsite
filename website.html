@@ -1,0 +1,174 @@
+<html> 
+	<head><title>Video Quality Test </title>
+    <link rel = "stylesheet" href = "website.css">
+    <style>
+        {
+            box-sizing: border-box;
+        }
+        .column {
+            float: left;
+            height: 50% 
+        }
+        .inputVideo { 
+            width: 25%;
+        }
+        .inputParameters {
+            width: 25%;
+        }
+        .outputVideo {
+            width: 25%;
+        }
+        .redflags {
+            width: 25%;
+        }
+        .row:after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+    </style>
+    </head>
+    
+    <body>
+        <h1>Video Quality Test</h1>
+        <div class="row">
+        <div class="column" style="background-color:#E0B41E;">
+            <h2>Input Video</h2>
+            <form action="/action_page.php"> 
+                <input type="file" name="input image" accept="image/*"?
+                <input type="submit">
+		    </form>
+            <!-- <video width="160" height = "120" controls>
+                <source src = "website.py" type = "video/mp4"> 
+                <source src= "website.py" tyoe = "video/ogg"> 
+            Your browser does not support the video tag. 
+            </video>d -->
+            <img src = "/Users/vainaviv/Documents/Pictures/Bahamas2019/IMG_1902.jpeg" width = "200" height = "160" alt = "Test Image">
+            
+        </div>
+        <div class="column" style="background-color:#96D1CD;">
+            <h2>Parameters</h2>
+            <form action = "/" method = "get"> 
+                Frames per second: <input type="text" name="fps" value=0 size="5"> Hz
+            </form>
+            <form>
+                Pixel Size: <input type = "text" name = "px_size" value=0 size = "5"> mm
+            </form>
+        </div>
+        <div class="column" style="background-color:#E0B41E;">
+            <h2>Output Video</h2>
+            <p>Movie Score: </p>
+            <!-- <video width="160" height = "120" controls>
+                <source src = "website.py" type = "video/mp4"> 
+                <source src= "website.py" tyoe = "video/ogg"> 
+            Your browser does not support the video tag. 
+            </video> -->
+            <script>
+                function getPixel(url, x, y) {
+                    var img = new Image();
+                    img src = url;
+                    var canvase = document.createElement('canvas');
+                    var context = canvas.getContext('2d');
+                    context.drawImage(img, 0, 0);
+                    return context.getImageData(x, y, 1, 1).data[0,3];
+                }
+                
+                function getComplexArray(url) {
+                    var Complex = [];
+                    var img = new Image();
+                    img.load(url);
+                    for (var y = 0; y < img.getHeight(); y++) {
+                        for (var x = 0; x < img.getWidth(); x++) {
+                            Complex.push(new Complex(x, y));
+                        }
+                    }
+                    return Complex;
+                }
+                
+                function getPixelArray(url) {
+                    var Pixels = [];
+                    var img = new Image();
+                    img.load(url);
+                    for (var y = 0; y < img.getHeight(); y++) {
+                        for (var x = 0; x < img.getWidth(); x++) {
+                            Pixels.push(getPixel(url, x, y));
+                        }
+                    }
+                    return Pixels;
+                }
+                var image_Pixels = getPixelArray("/Users/vainaviv/Documents/Pictures/Bahamas2019/IMG_1902.jpeg");
+                
+                //Loading image function: 
+                function loadImage(loc) {
+                    var start = +new Date();
+
+                    // placed in a callback so the UI has a chance to update
+                    disableButtons(function() {
+                      // draw the initial image
+                      var img = new Image();
+                      img.addEventListener('load', function() {
+                        // make each canvas the image's exact size
+                        dims[0] = img.width;
+                        dims[1] = img.height;
+                        for (var ai = 0; ai < 4; ai++) {
+                          canvases[ai] = $s('#canvas'+ai);
+                          canvases[ai].width = dims[0];
+                          canvases[ai].height = dims[1];
+                          ctxs[ai] = canvases[ai].getContext('2d');
+                        }
+
+                        // draw the image to the canvas
+                        ctxs[0].drawImage(img, 0, 0, img.width, img.height);
+
+                        // grab the pixels
+                        var imageData = ctxs[0].getImageData(
+                          0, 0, dims[0], dims[1]
+                        );
+                        var h_es = []; // the h values
+                        for (var ai = 0; ai < imageData.data.length; ai+=4) {
+                          // greyscale, so you only need every 4th value
+                          h_es.push(imageData.data[ai]);
+                        }
+
+                        // initialize the h values
+                        h = function(n, m) {
+                          if (arguments.length === 0) return h_es;
+
+                          var idx = n*dims[0] + m;
+                          return h_es[idx];
+                        }; // make it a function so the code matches the math
+
+                        enableButtons();
+
+                        var duration = +new Date() - start;
+                        console.log(
+                          'It took ' + duration + 'ms to draw the image.'
+                        );
+                      });
+                      img.crossOrigin = "anonymous";
+                      img.src = loc;
+                    });
+                  }
+                loadImage("/Users/vainaviv/Documents/Pictures/Bahamas2019/IMG_1902.jpeg");
+                
+            </script>
+            
+            <!-- Another fourier transform for images --> 
+            <script> src = "/Users/vainaviv/Desktop/ResearchSpring2020/Website/javascriptFFTImage2.js"
+            </script>
+            <img output>
+        </div>
+        <div class="column" style="background-color:#E6583F;">
+            <h2>Red Flags</h2>
+            Redflags: {} <br>
+            <p></p>
+            ordered list: 
+            <ol> 
+	           <li> Item 1 </li>
+	           <li> Item 2 </li>
+	           <li> Item 3 </li>
+            </ol>
+        </div>
+        </div>
+    </body>
+</html>
